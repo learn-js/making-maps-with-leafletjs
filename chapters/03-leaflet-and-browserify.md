@@ -75,9 +75,6 @@ Create an html file that looks like this:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
-<!--[if lte IE 8]>
-  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.ie.css" />
-<![endif]-->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
