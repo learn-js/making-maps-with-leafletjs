@@ -141,6 +141,9 @@ If needed you can check out the Development Environments book on GitHub for free
 Though, if you’re feeling generous and able to purchase the book, that’ll get you pdf, epub, and mobi versions, as well as support my work.
 
 
+
+
+
 # The simplest possible map you can make
 
 ## Get a CloudMade account and API key
@@ -352,6 +355,7 @@ git push origin gh-pages
 ### Troubleshooting
 
 If GitHub Pages shows a 404 error at first, don't worry. It can take as much as 15 minutes before the GitHub server builds and starts serving your site. Be patient when you first launch the site. Later when you make updates the live site will usually reflect the changes more quickly.
+
 
 
 # Getting started with Leaflet.js using node.js, npm, and browserify
@@ -802,6 +806,8 @@ L.polygon([
 ### What’s next
 This gets you started with leaflet.js. You’ve learned about getting a map to show up on a page and drawing basic shapes. Just by composing shapes and popup markers in this way you can make a useful map very easily.
 
+
+
 # Useful Leaflet.js plugins
 
 ## Leaflet.markercluster
@@ -883,3 +889,5 @@ I'm releasing this book a few chapters at a time in part to get feedback from yo
 - Additional resources directory
 
 By purchasing the book you're basically subscribed to the upcoming chapter releases. The above list is somewhat revisable. I'm interested in hearing your thoughts on what chapters would be valuable to you. Email me at seth@superbigtree.com to let me know what types of Leaflet.js content you would find useful.
+
+
