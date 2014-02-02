@@ -233,7 +233,7 @@ In your package.json file, and change the scripts property to look like this:
 
 ```
 "scripts": {
-  "start": "beefy app.js:bundle.js --live",
+  "start": "beefy app.js:bundle.js --live"
 },
 
 ```
