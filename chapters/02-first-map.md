@@ -66,10 +66,7 @@ Give your html file the HTML5 doctype, open the `<html>` and `<head>` sections, 
 Include the Leaflet.js stylesheets from the leafletjs.com servers. The `<!--[if lte IE 8]>` tag is used to include the css styles that are specifically for versions of Internet Explorer less than or equal to IE 8.
 
 ```
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-    <!--[if lte IE 8]>
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-    <![endif]-->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 ```
 
 ### Add your own style
@@ -77,20 +74,19 @@ Include the Leaflet.js stylesheets from the leafletjs.com servers. The `<!--[if 
 Here we're adding the least amount of css it takes to get the map to fill the screen.
 
 ```
-    <style>
-    html, body { height: 100%; margin: 0px; }
-    #map { height: 100%; }
-    </style>
-  </head>
-
+<style>
+  html, body { height: 100%; margin: 0px; }
+  #map { height: 100%; }
+  </style>
+</head>
 ```
 
 ### Create the map container.
 This opens the `<body>` section. The `#map` div is where we'll put the map using javascript.
 
 ```
-  <body>
-    <div id="map"></div>
+<body>
+  <div id="map"></div>
 
 ```
 
@@ -98,15 +94,15 @@ This opens the `<body>` section. The `#map` div is where we'll put the map using
 Include the Leaflet.js library that's hosted on the leafletjs.com servers using this script tag.
 
 ```
-    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 ```
 
 ### Your map script
 We use an opening `<script>` tag, then set a variable named attribution to a string that contains all the copyright info we need to convey about the map. If you use different tiles or data you'll want to change the attribution to reflect the resources you use in your map.
 
 ```
-    <script>
-    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+<script>
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
 ```
 
 ### Initialize the map
@@ -115,7 +111,7 @@ We're creating a map object and assigning it to the map div. `L.map()` takes the
 `.setView()` takes the latitude and longitude that we want the map to center on as an array, and an integer for the zoom level.
 
 ```
-    var map = L.map('map').setView([48.98337, -123.05855], 13);
+var map = L.map('map').setView([48.98337, -123.05855], 13);
 ```
 
 ### Add tiles to the map
@@ -128,10 +124,10 @@ The `.addTo(map);` method is used to finally put the tile layer on the map.
 
 
 ```
-    L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
-      attribution: attribution,
-      maxZoom: 18
-    }).addTo(map);
+L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+  attribution: attribution,
+  maxZoom: 18
+}).addTo(map);
 ```
 
 ## Add a marker
@@ -144,10 +140,10 @@ With `marker.bindPopup()` we add a pop-up window to the marker, and pass in the 
 
 
 ```
-    var marker = L.marker([48.98337, -123.05855]).addTo(map);
-    var markerHtml = 'This place is weird';
-    marker.bindPopup(markerHtml);
-    </script>
+var marker = L.marker([48.98337, -123.05855]).addTo(map);
+var markerHtml = 'This place is weird';
+marker.bindPopup(markerHtml);
+</script>
 ```
 
 ### That's about it
