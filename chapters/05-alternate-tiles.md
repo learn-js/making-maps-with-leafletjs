@@ -5,10 +5,9 @@ The Leaflet tutorials all use CloudMade tiles for the examples. Those tiles look
 For the examples in this chapter we'll build on the example created in chapter 3.
 
 ### In this chapter we'll take a look at these options for Leaflet tiles:
-- Using Stamen tiles
-- Using alternate CloudMade tiles
-- Using MapBox tiles
-- Creating custom tiles with TileMill that are served using MapBox
+- Using [Stamen tiles](http://maps.stamen.com)
+- Using [Mapbox tiles](https://www.mapbox.com)
+- Using alternate [CloudMade tiles](http://maps.cloudmade.com/editor)
 
 But first we'll do a quick refresher on the file structure to make sure you have everything set up.
 
@@ -64,7 +63,7 @@ map.setView([47.63, -122.32], 11);
 var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
  
 // create a tileLayer with the tiles, attribution
 var layer = new L.StamenTileLayer('watercolor');
@@ -72,6 +71,8 @@ var layer = new L.StamenTileLayer('watercolor');
 // add the tile layer to the map
 layer.addTo(map);
 ```
+
+If you lost your CloudMade API key, you can find it by logging in to [cloudmade.com](http://cloudmade.com), or you can also make a new API key there.
 
 The contents of your package.json file should be very similar to this:
 
@@ -110,6 +111,19 @@ Now we should be ready!
 ## Install the leaflet-providers module
 
 In order to use these alternate tile providers, we're going to use a module named [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers).
+
+With this module we can use tile layers from:
+
+- Mapbox
+- CloudMade
+- Stamen
+- OpenStreetMap
+- MapQuestOpen
+- Esri
+- OpenWeatherMap
+- Nokia
+
+Mapbox, CloudMade, and Nokia require registration. Learn more at the [leaflet-providers GitHub page](https://github.com/leaflet-extras/leaflet-providers).
 
 ### Install leaflet-providers
 
@@ -171,7 +185,7 @@ Note that we removed these lines:
 var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
 ```
 
 They are unnecessary because the `L.tileLayer.provider('Stamen.Watercolor')` method takes care of the tiles url and attribution string for us.
@@ -179,3 +193,99 @@ They are unnecessary because the `L.tileLayer.provider('Stamen.Watercolor')` met
 ### Check out your Watercolor map!
 
 If you run `npm start` and go to http://localhost:9966, you should see an awesome watercolor map! Looks good, right?
+
+
+## Using Mapbox tiles
+
+You'll want to use [Mapbox tiles](https://www.mapbox.com). They are beautiful.
+
+```
+L.tileLayer.provider('MapBox.YourUsername.MapID').addTo(map);
+```
+
+Here's an example map with new styles I made in about 5 minutes using the simple editor on mapbox.com:
+
+```
+var layer = L.tileLayer.provider('MapBox.sethvincent.h60m4iih');
+```
+
+Once you add in the above line to replace the CloudMade tileset, your app.js file should look like this:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+require('leaflet-providers');
+
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+
+// create a tileLayer with the tiles, attribution
+var layer = L.tileLayer.provider('MapBox.sethvincent.h60m4iih');
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+
+When you make a map at mapbox.com, look for the map ID in your projects list after you log in, or, if you're editing a map, the ID is found be clicking the gear icon – it'll be at the top of that menu.
+
+In an upcoming chapter we'll work on an example where you'll design completely custom tiles using Mapbox's desktop app [TileMill](https://www.mapbox.com/tilemill/), upload the tiles to the Mapbox servers, and use the tiles in a Leaflet map!
+
+## Using alternate CloudMade tiles
+
+Using alternate tiles from CloudMade is very similar using the leaflet-providers module. The main differences are that you must specify an `apiKey` and `styleID`.
+
+Here's an example:
+
+```
+var layer = L.tileLayer.provider('CloudMade', {
+  apiKey: '!!! YOUR API KEY !!!',
+  styleID: '2172'
+});
+```
+
+The `styleID` of `2172` is for a fairly pleasant tile theme named Orange Yellow.
+
+To find and create new styles for CloudMade tiles go to [maps.cloudmade.com/editor](http://maps.cloudmade.com/editor).
+
+You'll see the `styleID` in the bottom right corner of each thumbnail.
+
+The full app.js file when using the CloudMade provider should look something like this:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+require('leaflet-providers');
+
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+
+// create a tileLayer with the tiles, attribution
+var layer = L.tileLayer.provider('CloudMade', {
+  apiKey: '!!! YOUR API KEY !!!',
+  styleID: '2172'
+});
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+
+
+### Other tilesets
+
+Most likely these three tile providers will provide tiles that fit your needs, but if you're looking for more, check out the leaflet-providers repository on GitHub: [github.com/leaflet-extras/leaflet-providers](https://github.com/leaflet-extras/leaflet-providers).

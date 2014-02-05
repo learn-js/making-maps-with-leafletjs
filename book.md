@@ -70,6 +70,7 @@ Here's the progress I've made so far on chapters. As you likely know, I'm releas
   - A map with one marker
   - Put the map on GitHub Pages
 - Getting started with Leaflet.js using node.js, npm, and browserify
+- Using alternate tilesets
 
 ### Started:
 
@@ -86,10 +87,6 @@ Here's the progress I've made so far on chapters. As you likely know, I'm releas
 ### Upcoming:
 - Data visualization styles you can use in your maps
 - Customizing your maps
-  - Map tiles
-    - CloudMade
-    - MapBox
-    - Stamen
   - Markers
   - Controls
 - Drawing shapes on maps
@@ -211,10 +208,7 @@ Give your html file the HTML5 doctype, open the `<html>` and `<head>` sections, 
 Include the Leaflet.js stylesheets from the leafletjs.com servers. The `<!--[if lte IE 8]>` tag is used to include the css styles that are specifically for versions of Internet Explorer less than or equal to IE 8.
 
 ```
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-    <!--[if lte IE 8]>
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-    <![endif]-->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 ```
 
 ### Add your own style
@@ -222,20 +216,19 @@ Include the Leaflet.js stylesheets from the leafletjs.com servers. The `<!--[if 
 Here we're adding the least amount of css it takes to get the map to fill the screen.
 
 ```
-    <style>
-    html, body { height: 100%; margin: 0px; }
-    #map { height: 100%; }
-    </style>
-  </head>
-
+<style>
+  html, body { height: 100%; margin: 0px; }
+  #map { height: 100%; }
+  </style>
+</head>
 ```
 
 ### Create the map container.
 This opens the `<body>` section. The `#map` div is where we'll put the map using javascript.
 
 ```
-  <body>
-    <div id="map"></div>
+<body>
+  <div id="map"></div>
 
 ```
 
@@ -243,15 +236,15 @@ This opens the `<body>` section. The `#map` div is where we'll put the map using
 Include the Leaflet.js library that's hosted on the leafletjs.com servers using this script tag.
 
 ```
-    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 ```
 
 ### Your map script
 We use an opening `<script>` tag, then set a variable named attribution to a string that contains all the copyright info we need to convey about the map. If you use different tiles or data you'll want to change the attribution to reflect the resources you use in your map.
 
 ```
-    <script>
-    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+<script>
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
 ```
 
 ### Initialize the map
@@ -260,7 +253,7 @@ We're creating a map object and assigning it to the map div. `L.map()` takes the
 `.setView()` takes the latitude and longitude that we want the map to center on as an array, and an integer for the zoom level.
 
 ```
-    var map = L.map('map').setView([48.98337, -123.05855], 13);
+var map = L.map('map').setView([48.98337, -123.05855], 13);
 ```
 
 ### Add tiles to the map
@@ -273,10 +266,10 @@ The `.addTo(map);` method is used to finally put the tile layer on the map.
 
 
 ```
-    L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
-      attribution: attribution,
-      maxZoom: 18
-    }).addTo(map);
+L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+  attribution: attribution,
+  maxZoom: 18
+}).addTo(map);
 ```
 
 ## Add a marker
@@ -289,10 +282,10 @@ With `marker.bindPopup()` we add a pop-up window to the marker, and pass in the 
 
 
 ```
-    var marker = L.marker([48.98337, -123.05855]).addTo(map);
-    var markerHtml = 'This place is weird';
-    marker.bindPopup(markerHtml);
-    </script>
+var marker = L.marker([48.98337, -123.05855]).addTo(map);
+var markerHtml = 'This place is weird';
+marker.bindPopup(markerHtml);
+</script>
 ```
 
 ### That's about it
@@ -435,9 +428,6 @@ Create an html file that looks like this:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
-<!--[if lte IE 8]>
-  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.ie.css" />
-<![endif]-->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -511,7 +501,7 @@ Finally, we need to tell the map to use a specific tileset:
 ```
 var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
 
-var tiles = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
 
 L.tileLayer(tiles, {
   maxZoom: 18,
@@ -524,11 +514,11 @@ It’s important to properly attribute tile image and data sources, so we’re s
 
 Next the `tiles` variable is set to a url for a popular cloudmade tileset. Note that we’re using the api key that Leaflet uses in tutorials. For production code you should [create an account on cloudmade.com](http://account.cloudmade.com/), and create an api key for your app.
 
-Then you can replace the `!!!APIKEY!!!` portion of the url seen below with your api key:
+Then you can replace the `!!! YOUR API KEY !!!` portion of the url seen below with your api key:
 
 
 ```
-var tiles = 'http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
 
 ```
 
@@ -554,7 +544,7 @@ map.setView([47.63, -122.32], 11);
 var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
 
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
 
 // create a tileLayer with the tiles, attribution
 var layer = L.tileLayer(tiles, {
@@ -596,7 +586,7 @@ In your package.json file, and change the scripts property to look like this:
 
 ```
 "scripts": {
-  "start": "beefy app.js:bundle.js --live",
+  "start": "beefy app.js:bundle.js --live"
 },
 
 ```
@@ -644,12 +634,14 @@ npm run bundle
 
 Run the above command and that will create the bundle.js file you can use when deploying your site to GitHub Pages or to another server.
 
-## basic elements of a leaflet map
+
+
+# Basic elements of a Leaflet.js map
 There are a few basic elements that you’ll use on regular basis for drawing on a map. Here’s a look at how to make each one of those:
 
-### UI Layers
+## UI Layers
 
-#### popups
+### popups
 
 To get started learning popups, let’s make the map show a popup with the latitude and longitude of place we click on the map.
 
@@ -682,7 +674,7 @@ function onClick(e){
 
 ```
 
-#### markers
+### markers
 
 To create a marker, use the `L.marker()` method:
 
@@ -725,11 +717,11 @@ marker.bindPopup(popupContent).openPopup();
 
 Now when you look at your map again, you'll see that the popup is open by default.
 
-### Vector layors
+## Vector layors
 
 Vectory layers are the things you can draw on top of the map. Some of the basic types: lines, rectangles, circles, and polygons. In this section we'll make one of each of those vector layer types.
 
-#### lines
+### Lines
 
 We'll use the `L.polyline` method for drawing lines on the map. it takes an array of lat/long coordinates, and an [options object](http://leafletjs.com/reference.html#polyline-options). This method extends the base `L.Path` method, so you can also use any [path options](http://leafletjs.com/reference.html#path-options).
 
@@ -758,7 +750,7 @@ polyline.addTo(map);
 
 This is a line along part of the I-5 highway in the Seattle area. Try it out in your map. Try changing the path to see what lines you can make. Remember that we made that popup that shows the lat/long when you click on the map. Use that to come up with coordinates that you want to place in your lat/lng array.
 
-#### rectangle
+### Rectangles
 
 Creating a rectangle is very similar to creating a polyline, but takes two coordinates that represent two corners of the rectangle.
 
@@ -773,7 +765,7 @@ rectangle.addTo(map);
 
 ```
 
-#### circle
+### Circles
 
 When creating a circle, we use the `L.circle` method and give one lat/lng coordinate as the center point, followed by the radius.
 
@@ -786,7 +778,7 @@ circle.addTo(map);
 
 ```
 
-#### polygon
+### Polygons
 
 A polygon can be any arbitrary shape, good for outlining buildings, parks, etc. To create a polygon, we use `L.polygon`.
 
@@ -808,54 +800,351 @@ This gets you started with leaflet.js. You’ve learned about getting a map to s
 
 
 
+# Using alternate tilesets
+
+The Leaflet tutorials all use CloudMade tiles for the examples. Those tiles look great, but it's common to want a little more control over the style of the map.
+
+For the examples in this chapter we'll build on the example created in chapter 3.
+
+### In this chapter we'll take a look at these options for Leaflet tiles:
+- Using [Stamen tiles](http://maps.stamen.com)
+- Using [Mapbox tiles](https://www.mapbox.com)
+- Using alternate [CloudMade tiles](http://maps.cloudmade.com/editor)
+
+But first we'll do a quick refresher on the file structure to make sure you have everything set up.
+
+## Get set up
+
+If you already created the example project from chapter 3 and have it ready to go, cd into that directory and skip or skim this set up section. Otherwise, if you need to recreate the project or feel like you could benefit from going through the code again, check out this section before moving to the alternate tilesets.
+
+Here is what your full index.html file should look like:
+
+```
+<!doctype html>
+<html>
+<head>
+  <title>leaflet example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="map"></div>
+  <script src="bundle.js"></script>
+</body>
+</html>
+```
+
+Here is what should be in your style.css file:
+
+```
+#map {
+  height: 300px;
+}
+```
+
+And this is what your app.js file should look like:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+ 
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+ 
+// set an attribution string
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+ 
+// set the tiles the map will use
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+ 
+// create a tileLayer with the tiles, attribution
+var layer = new L.StamenTileLayer('watercolor');
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+
+If you lost your CloudMade API key, you can find it by logging in to [cloudmade.com](http://cloudmade.com), or you can also make a new API key there.
+
+The contents of your package.json file should be very similar to this:
+
+```
+{
+  "name": "leaflet-basics",
+  "description": "introduction to using leaflet with browserify",
+  "version": "0.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "beefy index.js:bundle.js --live",
+    "bundle": "browserify index.js -o bundle.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "leaflet": "~0.7.2"
+  },
+  "devDependencies": {
+    "beefy": "~0.7.1",
+    "browserify": "~3.24.10"
+  }
+}
+```
+
+The important parts of the package.json file are the `scripts`, `dependencies`, and `devDependencies` sections. Make sure that at least those fields are intact in your package.json file.
+
+If you don't have a node_modules folder in your project directory, run this command to install the project dependencies:
+
+```
+npm install
+```
+
+Now we should be ready!
+
+## Install the leaflet-providers module
+
+In order to use these alternate tile providers, we're going to use a module named [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers).
+
+With this module we can use tile layers from:
+
+- Mapbox
+- CloudMade
+- Stamen
+- OpenStreetMap
+- MapQuestOpen
+- Esri
+- OpenWeatherMap
+- Nokia
+
+Mapbox, CloudMade, and Nokia require registration. Learn more at the [leaflet-providers GitHub page](https://github.com/leaflet-extras/leaflet-providers).
+
+### Install leaflet-providers
+
+```
+npm install --save leaflet-providers
+```
+
+## Using Stamen tiles
+
+Stamen is a design company that makes all kinds of beautiful things, including maps.
+
+Take a look at their [Toner](http://maps.stamen.com/toner/#14/37.7777/-122.4073), [Terrain](http://maps.stamen.com/terrain/#14/37.7777/-122.4073), and [Watercolor](http://maps.stamen.com/watercolor/#14/37.7777/-122.4073) map tiles. They're stunning. See more at [maps.stamen.com](http://maps.stamen.com).
+
+For this example, we'll use the Watercolor tileset.
+
+To use the Watercolor tiles, require the `leaflet-providers` module in your app.js file:
+
+```
+require('leaflet-providers');
+```
+
+> Note that we're not setting this module to a variable like with other modules. It's because the leaflet-providers module is a plugin to Leaflet that adds a `provider()` method to `L.tileLayer`. By requiring the module without setting it to a variable the module can modify variables in the global scope when required. 
+
+
+Next, set the layer variable to the new Stamen Watercolor tiles:
+
+```
+var layer = L.tileLayer.provider('Stamen.Watercolor').addTo(map);
+```
+
+Your full app.js file should now look like this:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+require('leaflet-providers');
+
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+
+// create a tileLayer with the tiles, attribution
+var layer = L.tileLayer.provider('Stamen.Watercolor').addTo(map);
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+Note that we removed these lines:
+
+``` 
+// set an attribution string
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+ 
+// set the tiles the map will use
+var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+```
+
+They are unnecessary because the `L.tileLayer.provider('Stamen.Watercolor')` method takes care of the tiles url and attribution string for us.
+
+### Check out your Watercolor map!
+
+If you run `npm start` and go to http://localhost:9966, you should see an awesome watercolor map! Looks good, right?
+
+
+## Using Mapbox tiles
+
+You'll want to use [Mapbox tiles](https://www.mapbox.com). They are beautiful.
+
+```
+L.tileLayer.provider('MapBox.YourUsername.MapID').addTo(map);
+```
+
+Here's an example map with new styles I made in about 5 minutes using the simple editor on mapbox.com:
+
+```
+var layer = L.tileLayer.provider('MapBox.sethvincent.h60m4iih');
+```
+
+Once you add in the above line to replace the CloudMade tileset, your app.js file should look like this:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+require('leaflet-providers');
+
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+
+// create a tileLayer with the tiles, attribution
+var layer = L.tileLayer.provider('MapBox.sethvincent.h60m4iih');
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+
+When you make a map at mapbox.com, look for the map ID in your projects list after you log in, or, if you're editing a map, the ID is found be clicking the gear icon – it'll be at the top of that menu.
+
+In an upcoming chapter we'll work on an example where you'll design completely custom tiles using Mapbox's desktop app [TileMill](https://www.mapbox.com/tilemill/), upload the tiles to the Mapbox servers, and use the tiles in a Leaflet map!
+
+## Using alternate CloudMade tiles
+
+Using alternate tiles from CloudMade is very similar using the leaflet-providers module. The main differences are that you must specify an `apiKey` and `styleID`.
+
+Here's an example:
+
+```
+var layer = L.tileLayer.provider('CloudMade', {
+  apiKey: '!!! YOUR API KEY !!!',
+  styleID: '2172'
+});
+```
+
+The `styleID` of `2172` is for a fairly pleasant tile theme named Orange Yellow.
+
+To find and create new styles for CloudMade tiles go to [maps.cloudmade.com/editor](http://maps.cloudmade.com/editor).
+
+You'll see the `styleID` in the bottom right corner of each thumbnail.
+
+The full app.js file when using the CloudMade provider should look something like this:
+
+```
+// require leaflet.js
+var L = require('leaflet');
+require('leaflet-providers');
+
+// specify the path to the leaflet images folder
+L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
+ 
+// initialize the map
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
+ 
+// set the position and zoom level of the map
+map.setView([47.63, -122.32], 11);
+
+// create a tileLayer with the tiles, attribution
+var layer = L.tileLayer.provider('CloudMade', {
+  apiKey: '!!! YOUR API KEY !!!',
+  styleID: '2172'
+});
+ 
+// add the tile layer to the map
+layer.addTo(map);
+```
+
+
+### Other tilesets
+
+Most likely these three tile providers will provide tiles that fit your needs, but if you're looking for more, check out the leaflet-providers repository on GitHub: [github.com/leaflet-extras/leaflet-providers](https://github.com/leaflet-extras/leaflet-providers).
+
+
 # Useful Leaflet.js plugins
 
-## Leaflet.markercluster
 
+## leaflet-omnivore
+The GeoJSON format is supported in core Leaflet, and leaflet-omnivore parses CSV, GPX, KML, WKT, and TopoJSON, so you can easily use those formats in your Leaflet maps.
+
+Project repository: [github.com/mapbox/leaflet-omnivore](github.com/mapbox/leaflet-omnivore)
+
+
+## Leaflet.markercluster
 Cluster your markers so that when zoomed out it's easier to see what's going on. You can see this plugin in action on Craigslist maps.
 
 Project repository: [github.com/Leaflet/Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster)
 
-## Leaflet.label
 
+## Leaflet.label
 Give nice labels to your markers in addition to the built in pop-ups provided by the core Leaflet library.
 
 Project repository: [github.com/Leaflet/Leaflet.label](https://github.com/Leaflet/Leaflet.label)
 
 
 ## Leaflet.awesome-markers
-
 Use markers with the [Font Awesome icon set](http://fontawesome.io/). The latest version works with [Bootstrap 3](http://getbootstrap.com/) and Font Awesome 4.0.
 
 Project repository: [github.com/lvoogdt/Leaflet.awesome-markers](https://github.com/lvoogdt/Leaflet.awesome-markers)
 
-## Leaflet.TextPath
 
+## Leaflet.TextPath
 Show some text along a Polyline layer on your map. Particularly interesting in combination with Font Awesome or another icon font. Useful for marking paths.
 
 Project repository: [github.com/makinacorpus/Leaflet.TextPath](https://github.com/makinacorpus/Leaflet.TextPath)
 
-## leaflet-hash
 
+## leaflet-hash
 Use leaflet-hash to create urls to map views. Just like Google Maps, you'll be able to share a specific position and zoom level of the map.
 
 Project repository: [github.com/mlevans/leaflet-hash](https://github.com/mlevans/leaflet-hash)
 
-## L.GeoSearch
 
+## L.GeoSearch
 L.GeoSearch provides basic geocoding functionality using Esri, Google, or OpenStreetMap as the geocoding provider.
 
 Project repository: [github.com/smeijer/L.GeoSearch](https://github.com/smeijer/L.GeoSearch)
 
-## Leaflet.draw
 
+## Leaflet.draw
 This plugin adds controls for drawing shapes on a Leaflet map.
 
 Project repository: [github.com/Leaflet/Leaflet.draw](https://github.com/Leaflet/Leaflet.draw)
 
 
 ## leaflet-search
-
 Use leaflet-search to quickly filter/search through layers on the map.
 
 Project repository: [github.com/stefanocudini/leaflet-search](https://github.com/stefanocudini/leaflet-search)

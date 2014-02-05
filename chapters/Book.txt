@@ -1,5 +1,7 @@
 01-introduction.md
 02-first-map.md
 03-leaflet-and-browserify.md
-04-leaflet-plugins.md
+04-basic-elements.md
+05-alternate-tiles.md
+06-leaflet-plugins.md
 work-in-progress.md

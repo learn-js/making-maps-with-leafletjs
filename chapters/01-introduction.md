@@ -70,6 +70,7 @@ Here's the progress I've made so far on chapters. As you likely know, I'm releas
   - A map with one marker
   - Put the map on GitHub Pages
 - Getting started with Leaflet.js using node.js, npm, and browserify
+- Using alternate tilesets
 
 ### Started:
 
@@ -86,10 +87,6 @@ Here's the progress I've made so far on chapters. As you likely know, I'm releas
 ### Upcoming:
 - Data visualization styles you can use in your maps
 - Customizing your maps
-  - Map tiles
-    - CloudMade
-    - MapBox
-    - Stamen
   - Markers
   - Controls
 - Drawing shapes on maps
