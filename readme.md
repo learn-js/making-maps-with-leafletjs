@@ -1,4 +1,4 @@
-# Learn.js #3: Making maps with Leaflet.js
+# Making maps with Leaflet.js
 > Learn.js is a series of guidebooks to building projects with javascript.
 
 This book is the third in a series about building projects with javascript. Learn more at [learnjs.io](http://learnjs.io).
