@@ -1,9 +1,9 @@
 
 # The simplest possible map you can make
 
-## Get a CloudMade account and API key
+## Get a MapBox account and map ID
 
-For a number of examples in this book we'll use map tiles from CloudMade. Create an account at [cloudmade.com](http://cloudmade.com/) and get an API key to use in these examples.
+For a number of examples in this book we'll use map tiles from MapBox. Create an account at [mapbox.com](http://mapbox.com/), create a project, and use the map ID from that project for these examples.
 
 ## Create an index.html file
 
@@ -31,11 +31,11 @@ Here's the full index.html file we're using in this example. As you can see ther
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
     <script>
-    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Tiles by <a href="http://mapbox.com">MapBox</a>';
 
     var map = L.map('map').setView([48.98337, -123.05855], 13);
     
-    L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png', {
       attribution: attribution,
       maxZoom: 18
     }).addTo(map);
@@ -102,7 +102,7 @@ We use an opening `<script>` tag, then set a variable named attribution to a str
 
 ```
 <script>
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 ```
 
 ### Initialize the map
@@ -118,13 +118,13 @@ var map = L.map('map').setView([48.98337, -123.05855], 13);
 
 `L.tileLayer()` is used to add tiles to the map. We set our attribution variable to the attribution option, and tell the layer to max out zooming at level 18.
 
-Make sure to replace !!!APIKEY!!! with the API key you got from Cloudmade.
+Make sure to replace !!!MAP_ID!!! with the map ID you got from MapBox.
 
 The `.addTo(map);` method is used to finally put the tile layer on the map.
 
 
 ```
-L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+L.tileLayer('http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png', {
   attribution: attribution,
   maxZoom: 18
 }).addTo(map);

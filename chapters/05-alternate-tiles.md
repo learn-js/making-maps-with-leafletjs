@@ -60,10 +60,10 @@ var map = L.map('map', {
 map.setView([47.63, -122.32], 11);
  
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
  
 // create a tileLayer with the tiles, attribution
 var layer = new L.StamenTileLayer('watercolor');
@@ -72,7 +72,7 @@ var layer = new L.StamenTileLayer('watercolor');
 layer.addTo(map);
 ```
 
-If you lost your CloudMade API key, you can find it by logging in to [cloudmade.com](http://cloudmade.com), or you can also make a new API key there.
+If you lost your MapBox map ID, you can find it by logging in to [mapbox.com](http://mapbox.com), or you can also make a new project to get a new map ID.
 
 The contents of your package.json file should be very similar to this:
 
@@ -182,10 +182,10 @@ Note that we removed these lines:
 
 ``` 
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 ```
 
 They are unnecessary because the `L.tileLayer.provider('Stamen.Watercolor')` method takes care of the tiles url and attribution string for us.

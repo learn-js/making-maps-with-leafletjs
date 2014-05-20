@@ -146,9 +146,9 @@ Finally, we need to tell the map to use a specific tileset:
 
 
 ```
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 L.tileLayer(tiles, {
   maxZoom: 18,
@@ -157,15 +157,15 @@ L.tileLayer(tiles, {
 
 ```
 
-It’s important to properly attribute tile image and data sources, so we’re setting the `attribution` variable to a string crediting OpenStreetMap and CloudMade.
+It’s important to properly attribute tile image and data sources, so we’re setting the `attribution` variable to a string crediting OpenStreetMap and MapBox.
 
-Next the `tiles` variable is set to a url for a popular cloudmade tileset. Note that we’re using the api key that Leaflet uses in tutorials. For production code you should [create an account on cloudmade.com](http://account.cloudmade.com/), and create an api key for your app.
+Next the `tiles` variable is set to a url for a MapBox tileset. [Create an account on mapbox.com](http://mapbox.com/), and create a project to get a map ID.
 
-Then you can replace the `!!! YOUR API KEY !!!` portion of the url seen below with your api key:
+Then you can replace the `!!!MAP_ID!!!` portion of the url seen below with your map ID:
 
 
 ```
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 ```
 
@@ -188,10 +188,10 @@ var map = L.map('map', {
 map.setView([47.63, -122.32], 11);
 
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 // create a tileLayer with the tiles, attribution
 var layer = L.tileLayer(tiles, {
