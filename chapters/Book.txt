@@ -4,4 +4,5 @@
 04-basic-elements.md
 05-alternate-tiles.md
 06-leaflet-plugins.md
+07-drawing.md
 work-in-progress.md
