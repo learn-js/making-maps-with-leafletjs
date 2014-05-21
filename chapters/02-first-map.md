@@ -194,7 +194,7 @@ git commit -m 'include a brief, clear message about the changes'
 Put your changes on a branch named gh-pages:
 
 ```
-bit checkout -b gh-pages
+git checkout -b gh-pages
 ```
 
 Now, push your changes back to GitHub:
