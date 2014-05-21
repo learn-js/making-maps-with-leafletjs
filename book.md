@@ -143,9 +143,9 @@ Though, if you’re feeling generous and able to purchase the book, that’ll ge
 
 # The simplest possible map you can make
 
-## Get a CloudMade account and API key
+## Get a MapBox account and map ID
 
-For a number of examples in this book we'll use map tiles from CloudMade. Create an account at [cloudmade.com](http://cloudmade.com/) and get an API key to use in these examples.
+For a number of examples in this book we'll use map tiles from MapBox. Create an account at [mapbox.com](http://mapbox.com/), create a project, and use the map ID from that project for these examples.
 
 ## Create an index.html file
 
@@ -173,11 +173,11 @@ Here's the full index.html file we're using in this example. As you can see ther
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
     <script>
-    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+    var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Tiles by <a href="http://mapbox.com">MapBox</a>';
 
     var map = L.map('map').setView([48.98337, -123.05855], 13);
     
-    L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png', {
       attribution: attribution,
       maxZoom: 18
     }).addTo(map);
@@ -244,7 +244,7 @@ We use an opening `<script>` tag, then set a variable named attribution to a str
 
 ```
 <script>
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 ```
 
 ### Initialize the map
@@ -260,13 +260,13 @@ var map = L.map('map').setView([48.98337, -123.05855], 13);
 
 `L.tileLayer()` is used to add tiles to the map. We set our attribution variable to the attribution option, and tell the layer to max out zooming at level 18.
 
-Make sure to replace !!!APIKEY!!! with the API key you got from Cloudmade.
+Make sure to replace !!!MAP_ID!!! with the map ID you got from MapBox.
 
 The `.addTo(map);` method is used to finally put the tile layer on the map.
 
 
 ```
-L.tileLayer('http://{s}.tile.cloudmade.com/!!!APIKEY!!!/997/256/{z}/{x}/{y}.png', {
+L.tileLayer('http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png', {
   attribution: attribution,
   maxZoom: 18
 }).addTo(map);
@@ -499,9 +499,9 @@ Finally, we need to tell the map to use a specific tileset:
 
 
 ```
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 L.tileLayer(tiles, {
   maxZoom: 18,
@@ -510,15 +510,15 @@ L.tileLayer(tiles, {
 
 ```
 
-It’s important to properly attribute tile image and data sources, so we’re setting the `attribution` variable to a string crediting OpenStreetMap and CloudMade.
+It’s important to properly attribute tile image and data sources, so we’re setting the `attribution` variable to a string crediting OpenStreetMap and MapBox.
 
-Next the `tiles` variable is set to a url for a popular cloudmade tileset. Note that we’re using the api key that Leaflet uses in tutorials. For production code you should [create an account on cloudmade.com](http://account.cloudmade.com/), and create an api key for your app.
+Next the `tiles` variable is set to a url for a MapBox tileset. [Create an account on mapbox.com](http://mapbox.com/), and create a project to get a map ID.
 
-Then you can replace the `!!! YOUR API KEY !!!` portion of the url seen below with your api key:
+Then you can replace the `!!!MAP_ID!!!` portion of the url seen below with your map ID:
 
 
 ```
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 ```
 
@@ -541,10 +541,10 @@ var map = L.map('map', {
 map.setView([47.63, -122.32], 11);
 
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
 
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 
 // create a tileLayer with the tiles, attribution
 var layer = L.tileLayer(tiles, {
@@ -862,10 +862,10 @@ var map = L.map('map', {
 map.setView([47.63, -122.32], 11);
  
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
  
 // create a tileLayer with the tiles, attribution
 var layer = new L.StamenTileLayer('watercolor');
@@ -874,7 +874,7 @@ var layer = new L.StamenTileLayer('watercolor');
 layer.addTo(map);
 ```
 
-If you lost your CloudMade API key, you can find it by logging in to [cloudmade.com](http://cloudmade.com), or you can also make a new API key there.
+If you lost your MapBox map ID, you can find it by logging in to [mapbox.com](http://mapbox.com), or you can also make a new project to get a new map ID.
 
 The contents of your package.json file should be very similar to this:
 
@@ -984,10 +984,10 @@ Note that we removed these lines:
 
 ``` 
 // set an attribution string
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">MapBox</a>';
  
 // set the tiles the map will use
-var tiles = 'http://{s}.tile.cloudmade.com/!!! YOUR API KEY !!!/997/256/{z}/{x}/{y}.png';
+var tiles = 'http://{s}.tiles.mapbox.com/v3/!!!MAP_ID!!!/{z}/{x}/{y}.png';
 ```
 
 They are unnecessary because the `L.tileLayer.provider('Stamen.Watercolor')` method takes care of the tiles url and attribution string for us.
@@ -1153,19 +1153,28 @@ Project repository: [github.com/stefanocudini/leaflet-search](https://github.com
 
 # Drawing shapes on a Leaflet map
 
+In this tutorial we'll cover how to create a map with Leaflet.js that you can draw shapes on!
+
 ## Getting started
+
+To get started we'll create the folder and files needed, and install dependencies.
 
 ### Make a project directory
 
 ```
 mkdir leaflet-draw-example
+cd leaflet-draw-example
 ```
+
+Create the directory for the project with `mkdir`, then enter the directory using `cd`.
 
 ### Create necessary files
 
 ```
 touch index.js index.html style.css
 ```
+
+Use `touch` to create the necessary files for the project.
 
 ### Create package.json file
 
@@ -1195,15 +1204,29 @@ Answer the prompts, and you should get output similar to this:
 npm i --save leaflet leaflet-draw leaflet-providers
 ```
 
+We'll install the 3 dependencies for the project using `npm`.
+
 ## Basic CSS & HTML
+
+The HTML and CSS for this project is fairly minimal, we'll mostly focus on the JavaScript required to get started with a drawing project.
 
 ### Add rule to style.css
 
 ```
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
 #map {
-  height: 300px;
+  height: 100%;
+  width: 100%;
 }
 ```
+
+These CSS styles ensure that the map fits the full width and height of the browser window.
 
 ### Add boilerplate to index.html
 
@@ -1228,6 +1251,8 @@ npm i --save leaflet leaflet-draw leaflet-providers
 </html>
 ```
 
+Note that the css is being pulled directly from the dependencies in the node_modules folder. This means that you should add the entire node_modules folder to a .gitignore file if you're using git.
+
 ## Edit index.js
 
 ### Require the leaflet modules
@@ -1238,11 +1263,15 @@ require('leaflet-draw');
 require('leaflet-providers');
 ```
 
+Note that leaflet-draw and leaflet-providers are being added to the global scope when they are required without setting them to a variable. This makes it so they can add methods to Leaflet's `L` object.
+
 ### Set Leaflet images path
 
 ```
 L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
 ```
+
+Leaflet needs to know that the images are in this folder.
 
 ### Create map
 
@@ -1250,11 +1279,15 @@ L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
 var map = L.map('map');
 ```
 
+Create the map using the `L.map` method.
+
 ### Set the latitude, longitude, and zoom of the map
 
 ```
 map.setView([47.63, -122.32], 11);
 ```
+
+The `map.setView` method sets the latitude, longitude, and zoom level.
 
 ### Use `L.tileLayer.provider()` method to add Stamen Watercolor tiles and add tile layer to map
 
@@ -1263,12 +1296,16 @@ var layer = L.tileLayer.provider('Stamen.Watercolor');
 layer.addTo(map);
 ```
 
+The Watercolor tileset from Stamen is super pretty, so it's a fun example to use. Note that the `provider` method was added because we required the leaflet-providers module.
+
 ### Initialize a geoJson layer to save the features drawn on the map
 
 ```
 var drawnItems = L.geoJson()
 map.addLayer(drawnItems);
 ```
+
+This initializes a `drawnItems` object which we'll use to track the features you draw on the map.
 
 ### Create draw controls and add them to the map
 
@@ -1280,11 +1317,15 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl);
 ```
 
+Adding leaflet-draw controls to the map is pretty easy. By default we'll be able to draw polygons, circles, rectangles, lines, and points.
+
 ### Create features array for storing an array fo GeoJSON features
 
 ```
 var features = [];
 ```
+
+The features array is something you might use for storing all the GeoJSON layers for sending back to a server.
 
 ### Listen for the `draw:created` event
 ```
@@ -1296,6 +1337,10 @@ map.on('draw:created', function (e) {
 });
 ```
 
+Every time a feature is drawn on to the map, the `draw:created` event will fire, and we'll store the layer in both `drawnItems` and `features`.
+
+Instead of using `console.log()`, this is where you might send a request to your server to save the features.
+
 ### Listen for the `draw:edited` event
 ```
 map.on('draw:edited', function (e) {
@@ -1304,6 +1349,10 @@ map.on('draw:edited', function (e) {
   console.log(drawnItems)
 });
 ```
+
+Every time a feature is edited on the map, the `draw:edited` event will fire, and we'll update the layer in both `drawnItems` and `features`.
+
+Instead of using `console.log()`, this is where you might send a request to your server to save the features.
 
 ### Full JavaScript example:
 
